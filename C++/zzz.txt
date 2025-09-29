@@ -1,0 +1,45 @@
+🔹 Example Code (Side by Side)
+JavaScript – Map
+let m = new Map();
+m.set("a", 1);
+console.log(m.get("a")); // 1
+console.log(m.has("a")); // true
+m.delete("a");
+
+JavaScript – Set
+let s = new Set();
+s.add(10);
+console.log(s.has(10)); // true
+s.delete(10);
+
+C++ – std::map
+#include <map>
+#include <iostream>
+using namespace std;
+
+int main() {
+    map<string,int> m;
+    m["a"] = 1;              // insert
+    cout << m["a"] << endl;  // access
+    if (m.find("a") != m.end()) cout << "found\n";
+    m.erase("a");            // delete
+}
+
+C++ – std::set
+#include <set>
+#include <iostream>
+using namespace std;
+
+int main() {
+    set<int> s;
+    s.insert(10);
+    if (s.find(10) != s.end()) cout << "found\n";
+    s.erase(10);
+}
+
+
+⚡️ Quick takeaway:
+
+Map (JS/C++) → use when you need key → value mapping (like a dictionary).
+
+Set (JS/C++) → use when you only need unique values.
