@@ -13,6 +13,9 @@
 //11 Check if a number is prime.
 //12 Generate all prime numbers up to n.
 
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 ////📌 1. Print Fibonacci sequence up to n terms
 function fibonacci(n) {
   let seq = [0, 1];
@@ -85,6 +88,9 @@ function palindromeShortCut(str) {
 console.log(isPalindrome("Racecar")); // true
 console.log(palindromeShortCut("hello")); // false
 
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 ////📌 4. Reverse a string without using built-in reverse
 function reverseString(str) {
   let result = "";
@@ -96,7 +102,49 @@ function reverseString(str) {
 
 // Example
 console.log(reverseString("hello")); // "olleh"
+// 1. Using built-in methods (short & clean)
+function reverseString(str) {
+  return str.split("").reverse().join("");
+}
+// 2. Using spread syntax
+function reverseString(str) {
+  return [...str].reverse().join("");
+}
+// 3. Using reduce (functional style)
+function reverseString(str) {
+  return str.split("").reduce((rev, char) => char + rev, "");
+}
+// ⚡ But you can do it with divide and conquer (still O(n) time, but cool to see recursion):
 
+function reverseString(str) {
+  if (str.length <= 1) return str;
+
+  const mid = Math.floor(str.length / 2);
+  const left = str.slice(0, mid);
+  const right = str.slice(mid);
+
+  // reverse right + reverse left
+  return reverseString(right) + reverseString(left);
+}
+// 🔹 In-place style (swap with two pointers)
+function reverseString(str) {
+  let arr = str.split("");
+  let left = 0,
+    right = arr.length - 1;
+
+  while (left < right) {
+    [arr[left], arr[right]] = [arr[right], arr[left]]; // swap
+    left++;
+    right--;
+  }
+
+  return arr.join("");
+}
+console.log(reverseString("hello")); // "olleh"
+
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 ////📌 5. Find the largest and smallest number in an array
 function findMinMax(arr) {
   let min = arr[0],
@@ -111,6 +159,9 @@ function findMinMax(arr) {
 // Example
 console.log(findMinMax([3, 7, 2, 9, -1])); // { min: -1, max: 9 }
 
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 ////📌 6. Find the second largest element in an array
 function secondLargest(arr) {
   let first = -Infinity,
@@ -125,10 +176,27 @@ function secondLargest(arr) {
   }
   return second === -Infinity ? null : second;
 }
-
 // Example
 console.log(secondLargest([10, 5, 20, 8])); // 10
-
+// 🔹 1. Using Math.min / Math.max with spread
+function findMinMax(arr) {
+  return {
+    min: Math.min(...arr),
+    max: Math.max(...arr),
+  };
+}
+console.log(findMinMax([3, 7, 2, 9, -1]));
+// { min: -1, max: 9 }
+// 🔹 3. Using sort (less efficient: O(n log n))
+function findMinMax(arr) {
+  const sorted = [...arr].sort((a, b) => a - b);
+  return { min: sorted[0], max: sorted[sorted.length - 1] };
+}
+console.log(findMinMax([3, 7, 2, 9, -1]));
+// { min: -1, max: 9 }
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 ////📌 7. Count vowels and consonants in a string
 function countVowelsConsonants(str) {
   str = str.toLowerCase().replace(/[^a-z]/g, "");
